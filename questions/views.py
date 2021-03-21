@@ -69,20 +69,19 @@ class UserAnswerView(CreateAPIView):
     serializer_class = UserAnswerSerializer
 
     def post(self, request):
-        request.session["user"] = str(
-            MultiChoiceUser.objects.latest("first_name")
-        )
+        # Assigning to the session to map user to answer
+        self.request.session["user"] = MultiChoiceUser.objects.last()
         user = self.request.session["user"]
-        look_up = MultiChoiceUser.objects.filter(first_name=user)
-        print("This is what I am printing out", user, look_up)
+        print("This is what I am printing out", user)
         serializer = UserAnswerSerializer(data=self.request.data)
         serializer.is_valid(raise_exception=True)
         answers = serializer.validated_data.get("answers")
         print("These are the answers, answers", answers)
-        # MultiChoiceAnswer.objects.create(
-        #     answers=answers,
-        #     user=
-        # )
+        MultiChoiceAnswer.objects.create(
+            answers=answers,
+            user=user
+        )
+        del self.request.session["user"]
         return Response(
             "All good",
             status=status.HTTP_200_OK

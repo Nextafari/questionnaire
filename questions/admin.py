@@ -36,7 +36,7 @@ admin.site.register(MultiChoiceQuestions, MultiChoiceQuestionsDB)
 
 class MultiChoiceAnswerDB(admin.ModelAdmin):
     list_display = [
-        "answers"
+        "answers", "user"
     ]
 
 
