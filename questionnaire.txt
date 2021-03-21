@@ -1,0 +1,30 @@
+This is going to be a multichoice exam project
+users will be able to answer questions and get rated according to their answers
+users are meant to categorized based on their scores after taking the sample test or answering the 
+questions asked an email is also meant to be sent to the admin of the website with respect to the users 
+score and category they fall into
+
+
+Actors and actions
+user -- user is a human being taking the exam
+User model == name, age, email, phone_number, marital_status, occupation, address,  postal_zip_code
+
+
+category model==This will house the various categories a user falls into based on their average scores
+The average scores will emante from using some factorials in the views to multiply the users individual
+scores
+
+
+category model = will be a one to one field with the user model, because a user can only be in one category
+at a time, the category model will be a choice field that will be mapped to a user and displayed 
+to them after they must have taken the tests
+
+
+The question and scores should be saved in the database, and the calculation should be implemented from the
+frontend whereby each questions score is saved on the browsers temporary storage like session and cookies
+and then calculated once the user ends the session by clicking. This can also be implemented from the backend
+
+
+
+There should be a model for answers and this will later be querried and compared to a set of rules using
+conditional statements, and then the user can now be profiled based on their answer
