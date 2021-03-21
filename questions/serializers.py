@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import MultiChoiceQuestions, MultiChoiceUser
+from .models import (
+    MultiChoiceQuestions, MultiChoiceUser, MultiChoiceAnswer
+)
 
 
 class GetUserSerializer(serializers.ModelSerializer):
@@ -16,4 +18,14 @@ class GetAllQuestionsSerializer(serializers.ModelSerializer):
     """Get all Questions"""
     class Meta:
         model = MultiChoiceQuestions
-        fields = "__all__"
+        fields = [
+            "question"
+        ]
+
+
+class UserAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MultiChoiceAnswer
+        fields = [
+            "answers"
+        ]

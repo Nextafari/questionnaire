@@ -1,9 +1,16 @@
-from rest_framework.views import APIView
-from .models import MultiChoiceUser, MultiChoiceQuestions
-from .serializers import GetUserSerializer, GetAllQuestionsSerializer
-from rest_framework.response import Response
-from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
+from rest_framework.generics import CreateAPIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .models import (
+    MultiChoiceAnswer, MultiChoiceQuestions, MultiChoiceUser
+)
+from .serializers import (
+    GetAllQuestionsSerializer, GetUserSerializer,
+    UserAnswerSerializer
+)
 
 
 class GetUserDetailsView(APIView):
@@ -55,3 +62,32 @@ class MultiChoiceQuestionsView(APIView):
             serializer.data,
             status=status.HTTP_200_OK
         )
+
+
+class UserAnswerView(CreateAPIView):
+    """Gets the user's answer and compares it against a range of profiles"""
+    serializer_class = UserAnswerSerializer
+
+    def post(self, request):
+        request.session["user"] = str(
+            MultiChoiceUser.objects.latest("first_name")
+        )
+        user = self.request.session["user"]
+        look_up = MultiChoiceUser.objects.filter(first_name=user)
+        print("This is what I am printing out", user, look_up)
+        serializer = UserAnswerSerializer(data=self.request.data)
+        serializer.is_valid(raise_exception=True)
+        answers = serializer.validated_data.get("answers")
+        print("These are the answers, answers", answers)
+        # MultiChoiceAnswer.objects.create(
+        #     answers=answers,
+        #     user=
+        # )
+        return Response(
+            "All good",
+            status=status.HTTP_200_OK
+        )
+
+
+class CompareUserView(APIView):
+    pass
