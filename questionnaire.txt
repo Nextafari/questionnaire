@@ -28,3 +28,10 @@ and then calculated once the user ends the session by clicking. This can also be
 
 There should be a model for answers and this will later be querried and compared to a set of rules using
 conditional statements, and then the user can now be profiled based on their answer
+
+Give each answer a value attached to it, sum all the values of the users answer and run it against the other
+value that is to be compare. Make sure to use something like this A=70, B=60, C=50, such that when a user
+gets a score within that range, they can be profiled to be for instance, an A student or a B student.
+
+
+Generate a random ID to match user to their answers. 

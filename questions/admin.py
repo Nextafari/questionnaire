@@ -17,7 +17,7 @@ admin.site.register(User, UserDb)
 
 class MultiChoiceUserDB(admin.ModelAdmin):
     list_display = [
-        "first_name", "last_name", "occupation", "highest_education",
+        "first_name", "uuid", "last_name", "occupation", "highest_education",
         "phone_number", "address", "postal_code", "marital_status"
     ]
 
@@ -36,7 +36,7 @@ admin.site.register(MultiChoiceQuestions, MultiChoiceQuestionsDB)
 
 class MultiChoiceAnswerDB(admin.ModelAdmin):
     list_display = [
-        "answers"
+        "answers", "user"
     ]
 
 

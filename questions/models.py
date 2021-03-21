@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.db import models
+from .random_id import random_id
 
 
 class UserManager(BaseUserManager):
@@ -88,6 +89,12 @@ class MultiChoiceUser(models.Model):
         verbose_name_plural = "Multi choice User"
 
     first_name = models.CharField(max_length=100)
+    uuid = models.CharField(
+        max_length=150,
+        default=random_id,
+        blank=True,
+        null=True
+    )
     last_name = models.CharField(max_length=100)
     occupation = models.CharField(max_length=150)
     highest_education = models.CharField(max_length=150)
@@ -95,6 +102,9 @@ class MultiChoiceUser(models.Model):
     address = models.CharField(max_length=150)
     postal_code = models.CharField(max_length=10)
     marital_status = models.CharField(max_length=30)
+
+    def __str__(self):
+        return f"{self.uuid}"
 
 
 class MultiChoiceQuestions(models.Model):
@@ -111,3 +121,8 @@ class MultiChoiceAnswer(models.Model):
         verbose_name_plural = "Multi Choice Answer"
 
     answers = models.TextField()
+    user = models.OneToOneField(
+        to=MultiChoiceUser,
+        null=True,
+        on_delete=models.SET_NULL
+    )

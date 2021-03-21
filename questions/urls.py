@@ -13,4 +13,9 @@ urlpatterns = [
         views.MultiChoiceQuestionsView.as_view(),
         name="get_questions"
     ),
+    path(
+        "user_answer",
+        views.UserAnswerView.as_view(),
+        name="user_answer"
+    ),
 ]
