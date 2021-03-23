@@ -45,7 +45,6 @@ class GetUserDetailsView(APIView):
             postal_code=postal_code,
             marital_status=marital_status
         )
-
         return Response(
             "All, good", status=status.HTTP_200_OK
         )
@@ -83,7 +82,7 @@ class UserAnswerView(CreateAPIView):
         )
         del self.request.session["user"]
         return Response(
-            "All good",
+            "Submitted!",
             status=status.HTTP_200_OK
         )
 

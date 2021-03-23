@@ -121,6 +121,7 @@ class MultiChoiceAnswer(models.Model):
         verbose_name_plural = "Multi Choice Answer"
 
     answers = models.TextField()
+    score = models.IntegerField(default=0, blank=True)
     user = models.OneToOneField(
         to=MultiChoiceUser,
         null=True,
